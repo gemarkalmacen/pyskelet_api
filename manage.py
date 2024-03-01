@@ -2,7 +2,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from os.path import abspath, dirname, join
 
 def main():
     """Run administrative tasks."""
@@ -17,6 +17,9 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
+    # Add all the created modules into apps directory to sys.path
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 if __name__ == '__main__':
     main()

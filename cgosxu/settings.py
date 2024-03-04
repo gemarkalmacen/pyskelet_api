@@ -42,6 +42,12 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -52,9 +58,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # placed as high as possible before any middleware that generate responses. Else won't be able to add CORS headers to these responses
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
